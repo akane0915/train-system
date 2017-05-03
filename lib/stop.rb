@@ -21,6 +21,16 @@ class Stop
     stops_array
   end
 
+  def Stop.find (id)
+    found_stop = nil
+    Stop.all.each do |stop|
+      if stop.id == id
+        found_stop = stop
+      end
+    end
+    found_stop
+  end
+
   def ==(another_stop)
     self.id == another_stop.id
   end
@@ -41,5 +51,4 @@ class Stop
   def delete
     DB.exec("DELETE FROM stops WHERE id = #{@id} ")
   end
-
 end

@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-# TODO: delete method
 # TODO: find method
 # TODO: retrieve all trains by city
 # TODO: retrieve all cities by trains
@@ -91,6 +90,7 @@ describe Stop do
       expect(test_stop.time).to eq '13:00:00'
     end
   end
+
   describe '#delete' do
     it 'will delete a stop' do
       test_train1 = Train.new({:color => 'blue', :id => nil})
@@ -103,6 +103,14 @@ describe Stop do
       test_stop2.save
       test_stop1.delete
       expect(Stop.all).to eq [test_stop2]
+    end
+  end
+
+  describe '.find' do
+    it 'finds a stop by its id' do
+      test_stop = Stop.new({:id => nil, :train_id => 1, :city_id => 1, :time => '03:15:00'})
+      test_stop.save
+      expect(Stop.find(test_stop.id)).to eq test_stop
     end
   end
 end
