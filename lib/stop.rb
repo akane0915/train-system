@@ -30,4 +30,12 @@ class Stop
     @id = output.first.fetch("id").to_i
   end
 
+  def update(attributes)
+    # refactor tests to search database rather than relying on instance variables. use find when it exists
+    @train_id = attributes.fetch(:train_id)
+    @city_id = attributes.fetch(:city_id)
+    @time = attributes.fetch(:time)
+    DB.exec("UPDATE stops SET train_id = #{@train_id}, city_id = #{@city_id}, time = '#{@time}' WHERE id = #{@id};")
+  end
+
 end

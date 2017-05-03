@@ -1,9 +1,8 @@
 require 'spec_helper'
 
-# TODO: all method
-# TODO: save to db method
 # TODO: edit method
 # TODO: delete method
+# TODO: find method
 # TODO: retrieve all trains by city
 # TODO: retrieve all cities by trains
 
@@ -72,6 +71,25 @@ describe Stop do
       test_stop = Stop.new({:id => nil, :train_id => test_train.id, :city_id => test_city.id, :time => '08:00:00'})
       test_stop.save
       expect(Stop.all).to eq [test_stop]
+    end
+  end
+
+  describe '#update' do
+    it 'updates the details of a stop' do
+      test_train1 = Train.new({:color => 'blue', :id => nil})
+      test_train1.save
+      test_train2 = Train.new({:color => 'red', :id => nil})
+      test_train2.save
+      test_city1 = City.new({:name => 'portland', :id => nil})
+      test_city1.save
+      test_city2 = City.new({:name => 'seattle', :id => nil})
+      test_city2.save
+      test_stop = Stop.new({:id => nil, :train_id => test_train1.id, :city_id => test_city1.id, :time => '03:15:00'})
+      test_stop.save
+      test_stop.update({:train_id => test_train2.id, :city_id => test_city2.id, :time => '13:00:00'})
+      expect(test_stop.train_id).to eq test_train2.id
+      expect(test_stop.city_id).to eq test_city2.id
+      expect(test_stop.time).to eq '13:00:00'
     end
   end
 
