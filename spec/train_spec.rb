@@ -35,7 +35,7 @@ describe Train do
   end
 
   describe '#==' do
-    it 'is the same train if it has the same color and id' do
+    it 'will return true if two trains have the same id' do
       train1 = Train.new({:color => 'blue', :id => nil})
       train2 = Train.new({:color => 'blue', :id => nil})
       expect(train1 == train2).to eq true
