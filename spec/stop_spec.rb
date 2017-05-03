@@ -1,5 +1,12 @@
 require 'spec_helper'
 
+# TODO: all method
+# TODO: save to db method
+# TODO: edit method
+# TODO: delete method
+# TODO: retrieve all trains by city
+# TODO: retrieve all cities by trains
+
 describe Stop do
   describe '#==' do
     it 'will return true if two stops have the same id' do
@@ -40,4 +47,32 @@ describe Stop do
       expect(test_stop.time).to eq '08:00:00'
     end
   end
+
+  describe '.all' do
+    it 'will return an empty list if no stops exist' do
+      expect(Stop.all).to eq []
+    end
+    it 'will return a list of all stops' do
+      test_train = Train.new({:color => 'blue', :id => nil})
+      test_train.save
+      test_city = City.new({:name => 'portland', :id => nil})
+      test_city.save
+      test_stop = Stop.new({:id => nil, :train_id => test_train.id, :city_id => test_city.id, :time => '08:00:00'})
+      test_stop.save
+      expect(Stop.all).to eq [test_stop]
+    end
+  end
+
+  describe '#save' do
+    it 'will save a given stop to the database' do
+      test_train = Train.new({:color => 'blue', :id => nil})
+      test_train.save
+      test_city = City.new({:name => 'portland', :id => nil})
+      test_city.save
+      test_stop = Stop.new({:id => nil, :train_id => test_train.id, :city_id => test_city.id, :time => '08:00:00'})
+      test_stop.save
+      expect(Stop.all).to eq [test_stop]
+    end
+  end
+
 end
