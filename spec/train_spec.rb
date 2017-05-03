@@ -56,4 +56,12 @@ describe Train do
       expect(Train.all).to eq [train2]
     end
   end
+
+  describe '.find' do
+    it 'finds a train by its id' do
+      test_train = Train.new({:color => 'blue', :id => nil})
+      test_train.save
+      expect(Train.find(test_train.id)).to eq test_train
+    end
+  end
 end

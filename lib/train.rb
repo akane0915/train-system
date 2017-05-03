@@ -18,6 +18,16 @@ class Train
     trains_array
   end
 
+  def Train.find (id)
+    found_train = nil
+    Train.all.each do |train|
+      if train.id == id
+        found_train = train
+      end
+    end
+    found_train
+  end
+
   def save
     result = DB.exec("INSERT INTO trains (color) VALUES ('#{self.color}') RETURNING id;")
     @id = result.first.fetch('id').to_i
