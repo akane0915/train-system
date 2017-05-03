@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'sinatra/reloader'
-require './lib/trains'
+require './lib/train'
+require './lib/city'
 require 'pry'
 
 also_reload('lib/**/*.rb')
