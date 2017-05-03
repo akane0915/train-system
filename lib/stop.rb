@@ -38,4 +38,8 @@ class Stop
     DB.exec("UPDATE stops SET train_id = #{@train_id}, city_id = #{@city_id}, time = '#{@time}' WHERE id = #{@id};")
   end
 
+  def delete
+    DB.exec("DELETE FROM stops WHERE id = #{@id} ")
+  end
+
 end
