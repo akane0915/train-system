@@ -30,6 +30,10 @@ class Train
   def update(attributes)
     @color = attributes.fetch(:color)
     @id = self.id
-    DB.exec("UPDATE trains SET color = '#{@color}' WHERE id = #{@id}")
+    DB.exec("UPDATE trains SET color = '#{@color}' WHERE id = #{@id};")
+  end
+
+  def delete
+    DB.exec("DELETE from trains WHERE id = #{@id};")
   end
 end

@@ -45,4 +45,15 @@ describe Train do
       expect(test_train.color).to eq 'red'
     end
   end
+
+  describe '#delete' do
+    it 'deletes a train' do
+      train1 = Train.new({:color => 'blue', :id => nil})
+      train1.save
+      train2 = Train.new({:color => 'red', :id => nil})
+      train2.save
+      train1.delete
+      expect(Train.all).to eq [train2]
+    end
+  end
 end
