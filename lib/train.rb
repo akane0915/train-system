@@ -26,4 +26,10 @@ class Train
   def ==(another_train)
     self.id == another_train.id
   end
+
+  def update(attributes)
+    @color = attributes.fetch(:color)
+    @id = self.id
+    DB.exec("UPDATE trains SET color = '#{@color}' WHERE id = #{@id}")
+  end
 end

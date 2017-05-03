@@ -36,4 +36,13 @@ describe Train do
       expect(train1 == train2).to eq true
     end
   end
+
+  describe '#update' do
+    it 'updates the color of a train' do
+      test_train = Train.new({:color => 'blue', :id => nil})
+      test_train.save
+      test_train.update({:color => 'red'})
+      expect(test_train.color).to eq 'red'
+    end
+  end
 end
