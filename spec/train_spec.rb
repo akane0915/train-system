@@ -19,6 +19,11 @@ describe Train do
     it 'returns an empty array if there are no trains' do
       expect(Train.all).to eq []
     end
+    it 'returns a list of all trains' do
+      test_train = Train.new({:color => 'blue', :id => nil})
+      test_train.save
+      expect(Train.all).to eq [test_train]
+    end
   end
 
   describe '#save' do
