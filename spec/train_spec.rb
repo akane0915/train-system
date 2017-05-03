@@ -14,4 +14,11 @@ describe Train do
       expect(test_train.id).to eq nil
     end
   end
+
+  describe '.all' do
+    it 'returns an empty array if there are no trains' do
+      expect(Train.all).to eq []
+    end
+
+  end
 end
