@@ -69,3 +69,17 @@ patch '/trains/:id' do
   @cities = City.all
   erb :train_info
 end
+
+delete '/cities/:id' do
+  city_id = params.fetch('id').to_i
+  City.find(city_id).delete
+  @cities = City.all
+  erb :cities
+end
+
+delete '/trains/:id' do
+  train_id = params.fetch('id').to_i
+  Train.find(train_id).delete
+  @trains = Train.all
+  erb :trains
+end

@@ -1,5 +1,12 @@
 <h1><%= @train.color %> Train</h1>
 
+<form action="/trains/<%= @train.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+
+  <button type="submit">Delete This Train</button>
+</form>
+<br>
+
 <% if @cities.any? %>
   <h3>Select all cities for the <%= @train.color %> train:</h3>
   <form action="/trains/<%= @train.id %>" method="post">
@@ -15,10 +22,8 @@
 
     <button type="submit">Add cities</button>
   </form>
-
-<% else %>
-  <p>You must add a city!</p>
 <% end %>
+<hr>
 
 <% if @train.cities.any? %>
   <h3>Here are all the cities this train stops at:</h3>
