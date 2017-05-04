@@ -6,7 +6,7 @@ also_reload('lib/**/*.rb')
 require 'pry'
 require 'pg'
 
-DB = PG.connect({:dbname => 'train_system'})
+DB = PG.connect({:dbname => 'train_system_test'})
 
 get '/' do
   @trains = Train.all

@@ -21,11 +21,11 @@
 <% end %>
 
 <% if @city.trains.any? %>
-  <h3>Here are all trains which stop in this city:</h3>
+  <h3>Here are all the trains which stop in this city:</h3>
 
   <ul>
     <% @city.trains.each do |train| %>
-      <li><%= train.color %></li>
+      <li><%= train.color %> Train</li>
     <% end %>
   </ul>
 <% else %>
