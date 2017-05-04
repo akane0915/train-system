@@ -41,9 +41,9 @@ class Train
   def update(stop_data)
     @color = stop_data.fetch(:color, @color)
     DB.exec("UPDATE trains SET color = '#{@color}' WHERE id = #{@id};")
-
-    stop_data.fetch(:city_ids, []).each do |city_id|
-      DB.exec("INSERT INTO stops (train_id, city_id) VALUES (#{@id}, #{city_id});")
+    times = stop_data.fetch(:times, [])
+    stop_data.fetch(:city_ids, []).each_with_index do |city_id, index|
+      DB.exec("INSERT INTO stops (train_id, city_id, time) VALUES (#{@id}, #{city_id}, '#{times[index] ?  times[index] : "00:00:00"}');")
     end
   end
 

@@ -41,9 +41,10 @@ class City
   def update(stop_data)
     @name = stop_data.fetch(:name, @name)
     DB.exec("UPDATE cities SET name = '#{@name}' WHERE id = #{@id};")
-
-    stop_data.fetch(:train_ids, []).each do |train_id|
-      DB.exec("INSERT INTO stops (city_id, train_id) VALUES (#{@id}, #{train_id});")
+    times = stop_data.fetch(:times, [])
+    stop_data.fetch(:train_ids, []).each_with_index do |train_id, index|
+      DB.exec("INSERT INTO stops (city_id, train_id, time) VALUES (#{@id}, #{train_id}, '#{times[index] ?  times[index] : "00:00:00"}');")
+      # rule no. 1: don't let Aubrey touch the keyboard after 3:30
     end
   end
 

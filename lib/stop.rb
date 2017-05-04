@@ -21,6 +21,14 @@ class Stop
     stops_array
   end
 
+
+  def details
+    city = City.find(@city_id).name
+    train = Train.find(@train_id).color
+    time = @time
+    {:city => city, :train => train, :time => time}
+  end
+
   def Stop.find (id)
     found_stop = nil
     Stop.all.each do |stop|

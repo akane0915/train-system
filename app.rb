@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 require './lib/train'
 require './lib/city'
+require './lib/stop'
 also_reload('lib/**/*.rb')
 require 'pry'
 require 'pg'
@@ -11,6 +12,12 @@ DB = PG.connect({:dbname => 'train_system_test'})
 get '/' do
   @trains = Train.all
   @cities = City.all
+  stops = Stop.all
+  @timetable = []
+  stops.each do |stop|
+    @timetable.push(stop.details)
+  end
+  @timetable.sort_by!{|stop|stop.fetch(:time)}
   erb :index
 end
 
@@ -55,7 +62,8 @@ patch '/cities/:id' do
   city_id = params.fetch('id').to_i
   @city = City.find(city_id)
   train_ids = params.fetch('train_ids')
-  @city.update({:train_ids => train_ids})
+  times = params.fetch('times').delete_if{|time| time == ""}
+  @city.update({:train_ids => train_ids, :times => times})
   @trains = Train.all
   erb :city_info
 end
@@ -65,7 +73,8 @@ patch '/trains/:id' do
   train_id = params.fetch('id').to_i
   @train = Train.find(train_id)
   city_ids = params.fetch('city_ids')
-  @train.update({:city_ids => city_ids})
+  times = params.fetch('times').delete_if{|time| time == ""}
+  @train.update({:city_ids => city_ids, :times => times})
   @cities = City.all
   erb :train_info
 end

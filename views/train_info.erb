@@ -18,8 +18,16 @@
           <input type="checkbox" name="city_ids[]" value="<%= city.id %>"><%= city.name %>
         </label>
       </div>
+      <label for="times">Stop Time</label>
+      <select name="times[]" type="text">
+        <option value="">Enter Time</option>
+        <option value="08:30:00">8:30</option>
+        <option value="11:00:00">11:00</option>
+        <option value="14:30:00">14:30</option>
+        <option value="20:00:00">20:00</option>
+      </select>
     <% end %>
-
+    <br>
     <button type="submit">Add cities</button>
   </form>
 <% end %>

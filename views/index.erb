@@ -30,3 +30,28 @@
 <% else %>
   <p>No cities have been added yet!</p>
 <% end %>
+
+<h3>Here is a timetable of all train stops:</h3>
+
+<% if @timetable.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Arrival Time</th>
+        <th>Train</th>
+        <th>City</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @timetable.each do |stop|%>
+        <%="
+        <tr>
+          <td>#{stop.fetch(:time)}</td>
+          <td>#{stop.fetch(:train)}</td>
+          <td>#{stop.fetch(:city)}</td>
+        </tr>
+        "%>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
