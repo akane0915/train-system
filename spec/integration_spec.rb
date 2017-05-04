@@ -58,3 +58,15 @@ describe 'the stop creation path via the city page', {:type => :feature} do
     expect(page).to have_content 'Here are all the trains which stop in this city: Red Train'
   end
 end
+
+describe 'the delete train path', {:type => :feature} do
+  it 'lets the user delete a train' do
+    test_train = Train.new({:id => nil, :color => 'Red'})
+    test_train.save
+    id = test_train.id
+    visit "/trains/#{id}"
+    expect(page).to have_content 'Red Train'
+    click_button 'Delete This Train'
+    expect(page).to have_no_content 'Red Train'
+  end
+end
