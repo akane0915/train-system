@@ -37,11 +37,12 @@ class Train
     self.id == another_train.id
   end
 
-  def update(attributes)
-    @color = attributes.fetch(:color, @color)
+  # stop_data contains any information we need for creating new stops. e.g. city id's stop time and ticket price
+  def update(stop_data)
+    @color = stop_data.fetch(:color, @color)
     DB.exec("UPDATE trains SET color = '#{@color}' WHERE id = #{@id};")
 
-    attributes.fetch(:city_ids, []).each do |city_id|
+    stop_data.fetch(:city_ids, []).each do |city_id|
       DB.exec("INSERT INTO stops (train_id, city_id) VALUES (#{@id}, #{city_id});")
     end
   end
