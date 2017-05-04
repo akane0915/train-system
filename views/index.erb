@@ -1,12 +1,32 @@
-<%= # sample index html
-# <form action="/phrase_parser">
-#   <div class="form-group">
-#      <label for="title">gimme phrase or word!</label>
-#      <input name="phrase1" class="form-control" type="text">
-#      <label for="title">gimme another!</label>
-#      <input name="phrase2" class="form-control" type="text">
-#   </div>
-#   <hr>
-#   <button action="/" class="btn btn-success">what am i?</button>
-# </form>
-%>
+<h1>Welcome to the Oregon Train Website!</h1>
+<h3>A place where you can store and view trains, cities, and stop times.  You can also purchase a ticket!</h3>
+
+<p><a class='btn btn-default' href="/trains">Add a new train</a></p>
+<p><a class='btn btn-default' href="/cities">Add a new city</a></p>
+
+<h3>Here are all the trains in this database:</h3>
+
+<% if @trains.any? %>
+  <ul>
+    <% @trains.each do |train| %>
+      <%= "<li><a href='/trains/#{train.id}'>#{train.color}</a></li>" %>
+    <% end %>
+  </ul>
+
+<% else %>
+  <p>No trains have been added yet!</p>
+<% end %>
+
+
+<h3>Here are all the cities in this database:</h3>
+
+<% if @cities.any? %>
+  <ul>
+    <% @cities.each do |city| %>
+      <%= "<li><a href='/cities/#{city.id}'>#{city.color}</a></li>" %>
+    <% end %>
+  </ul>
+
+<% else %>
+  <p>No cities have been added yet!</p>
+<% end %>
