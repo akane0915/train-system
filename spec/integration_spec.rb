@@ -70,3 +70,15 @@ describe 'the delete train path', {:type => :feature} do
     expect(page).to have_no_content 'Red Train'
   end
 end
+
+describe 'the delete city path', {:type => :feature} do
+  it 'lets the user delete a city' do
+    test_city = City.new({:id => nil, :name => 'Portland'})
+    test_city.save
+    id = test_city.id
+    visit "/cities/#{id}"
+    expect(page).to have_content 'Portland'
+    click_button 'Delete This City'
+    expect(page).to have_no_content 'Portland'
+  end
+end
