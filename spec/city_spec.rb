@@ -42,8 +42,9 @@ describe City do
     end
   end
 
+# Add another test for update method to change city name
   describe '#update' do
-    it 'updates the trains that stop at a city' do
+    it 'updates the trains that stop at a city or the city name' do
       test_city = City.new({:name => 'portland', :id => nil})
       test_city.save
       train1 = Train.new({:color => 'blue', :id => nil})

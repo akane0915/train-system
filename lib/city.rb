@@ -52,7 +52,7 @@ class City
 
   def trains
     city_trains = []
-    train_objects = DB.exec("SELECT train_id FROM stops where city_id = #{@id};")
+    train_objects = DB.exec("SELECT train_id FROM stops WHERE city_id = #{@id};")
     train_objects.each do |train_object|
       train_id = train_object.fetch('train_id').to_i
       train = DB.exec("SELECT * FROM trains WHERE id = #{train_id}")
