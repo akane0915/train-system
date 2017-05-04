@@ -43,11 +43,15 @@ describe City do
   end
 
   describe '#update' do
-    it 'updates the name of a city' do
+    it 'updates the trains that stop at a city' do
       test_city = City.new({:name => 'portland', :id => nil})
       test_city.save
-      test_city.update({:name => 'seattle'})
-      expect(test_city.name).to eq 'seattle'
+      train1 = Train.new({:color => 'blue', :id => nil})
+      train1.save
+      train2 = Train.new({:color => 'red', :id => nil})
+      train2.save
+      test_city.update({:train_ids => [train1.id, train2.id]})
+      expect(test_city.trains).to eq [train1, train2]
     end
   end
 
@@ -67,6 +71,19 @@ describe City do
       test_city = City.new({:name => 'portland', :id => nil})
       test_city.save
       expect(City.find(test_city.id)).to eq test_city
+    end
+  end
+
+  describe '#trains' do
+    it 'returns the trains that stop at this city' do
+      test_city = City.new({:name => 'portland', :id => nil})
+      test_city.save
+      train1 = Train.new({:color => 'blue', :id => nil})
+      train1.save
+      train2 = Train.new({:color => 'red', :id => nil})
+      train2.save
+      test_city.update({:train_ids => [train1.id, train2.id]})
+      expect(test_city.trains).to eq [train1,train2]
     end
   end
 end
